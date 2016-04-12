@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+#parse ($init)
+<html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
+<head>
+	<title>TRUNG TÂM MẠNG THÔNG TIN - ĐHBKHN</title>
+	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+	$theme.include($top_head_include)
+</head>
+<body class="$css_class">
+	<a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
+	$theme.include($body_top_include)
+	#if ($is_signed_in)
+	#dockbar()
+	#end
+	
+<!--Banner-->
+	<div class="container-fluid" id="wrapper">
+	<header id="banner" role="banner">
+		<div class="border-top"></div>	
+		<div id="banner-left">
+			<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+				<img alt="$logo_description" src="/bknic-theme/images/logo-tran.png" />
+			</a>
+		</div>
+		<div id="banner-right">
+			<div class="top-links">
+				<span>
+					#if (!$is_signed_in)
+					<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
+					#end								
+					|
+					<a class="linksss1" href="http://202.191.57.208/web/bknic/lien-he">Hỗ trợ</a>
+					|
+					<a class="linksss2" href="http://202.191.57.208/web/bknic/lien-he">Liên hệ</a>
+					|
+					Ngôn ngữ:
+					<span>$theme.language("fm", null, "languageId", 0)</span>
+				</span>
+			</div>
+			<div class="search">
+			 	#set($tabs1URL = $portletURLFactory.create($request, "3", $page.getPlid(), "RENDER_PHASE"))			 
+				$tabs1URL.setWindowState("maximized")
+				$tabs1URL.setPortletMode("view")
+				$tabs1URL.setParameter("struts_action", "/search/search")
+				$tabs1URL.setParameter("_3_groupId","0")
+				<form id="_77_fm" class="form" action="$tabs1URL" method="post" name="_77_fm">
+					<input class="field" id="_77_keywords" type="text"   placeholder="Nhập nội dung tìm kiếm ..."  name="_77_keywords" onFocus="if (this.value == '$search_text...') { this.value = ''; }"/>
+					<input type="submit" border="0" title="Tìm kiếm" value="Tìm kiếm" id="button" name="button"  />						
+				</form>
+			</div>
+		</div>		
+	</header>
+	
+<!-- end header -->	
+	<div id="menu">
+		#if ($has_navigation || $is_signed_in)
+		#parse ("$full_templates_path/navigation.vm")
+		#end	
+	</div>
+
+	<div id="content">
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end	
+	</div>	
+<!-- begin footer-->
+	<footer id="footer" role="contentinfo">
+		<div id="wrapper-footer">
+			<div id="wapper-title-left">
+				<div class="bando">
+					<h4>BẢN ĐỒ</h4>
+					<p>Đại học Bách Khoa Hà Nội</p>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.66124870732!2d105.84093861451794!3d21.006211893924537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac76ccab6dd7%3A0x55e92a5b07a97d03!2zxJDhuqFpIEjhu41jIELDoWNoIEtob2EgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1454425177312" width="200" height="100" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+				<div class="mangxahoi">
+					<h4>MẠNG XÃ HỘI</h4>
+					<ul>
+						<li class="icon1"><a href="https://www.facebook.com/dhbkhanoi/?fref=ts"><img src="/bknic-theme/images/fb-icon.png" width="30px"/></a></li>
+						<li class="icon1"><a href="https://www.youtube.com/channel/UCDowNnOLEiWzum1d4Xlv4SA"><img src="/bknic-theme/images/ytb-icon.png" width="30px"/></a></li>
+						<li class="icon1"><a href="https://twitter.com/DHBachKhoaHaNoi"><img src="/bknic-theme/images/twitter-icon.png" width="30px"/></a></li>
+					<ul>
+				</div>
+			</div>
+			<div id="wapper-title-right">
+				<div id="wapper-title-top">
+					<div id="wapper-title-bottom">
+						<hr/>
+						<p>Bản quyền thiết kế - Trung tâm Truyền thông & Quan hệ công chúng</p>
+						<p>Đơn vị xây dựng, quản lý - Trung tâm Mạng Thông tin</p>
+						<p>Địa chỉ: P907 - Thư viện Tạ Quang Bửu - Trường ĐH Bách Khoa HN</p>
+						<p>Điện thoại: 043 868 4867</p>
+						<p>Email: thongtinweb@hust.edu.vn</p>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</footer>
+	
+<!-- end footer-->
+</div>
+$theme.include($body_bottom_include)
+$theme.include($bottom_include)
+</body>
+</html>
